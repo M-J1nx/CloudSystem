@@ -1,6 +1,8 @@
 const express = require('express');
 const cors = require('cors');
-const accountRouter = require('./routes/account');  
+const accountRouter = require('./routes/account');
+const addressRouter = require('./routes/address');
+const eventRouter = require('./routes/event');
 const app = express();
 const { PORT } = require('./env');
 
@@ -10,6 +12,8 @@ app.use(cors());
 app.use(express.json());
 
 app.use('/account', accountRouter);
+app.use('/address', addressRouter);
+app.use('/event', eventRouter);
 
 app.listen(port, () => {
     console.log(`Server is running on ${port}`);
