@@ -14,12 +14,12 @@ router.post('/signup', (req, res) => {
             return res.status(500).json({ message: '서버 내부 오류' });
         }
 
-        res.status(201).json({ message: '계정이 성공적으로 생성되었습니다.', id: results.insertId });
+        res.status(201).json({ message: '계정이 성공적으로 생성되었습니다.'});
     });
 });
 
 // 로그인 API
-router.post('/login', (req, res) => {
+router.get('/login', (req, res) => {
     const { id, password } = req.body;
 
     if (!id || !password) {
