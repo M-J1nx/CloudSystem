@@ -31,7 +31,7 @@ app.post('/account/signup', (req, res) => {
     const { id, password, name, email } = req.body;
 
     // DB 연결 가져오기
-    const query = 'INSERT INTO accounts (id, password, name, email) VALUES (?, ?, ?, ?)';
+    const query = 'INSERT INTO Company (user_id, user_pw, user_name, user_email) VALUES (?, ?, ?, ?)';
 
     connection.query(query, [id, password, name, email], (err, results) => {
         if (err) {
