@@ -259,7 +259,6 @@ router.post('/sendemail/:event_id', async (req, res) => {
             to: emailList, 
             subject: mailTitle,
             text: mailContent,
-            sendAt: reserveTime, 
         };
 
         // 이메일 전송
