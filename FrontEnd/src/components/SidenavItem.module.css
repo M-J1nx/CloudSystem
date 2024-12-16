@@ -1,0 +1,53 @@
+.cashIcon {
+  width: 36px;
+  position: relative;
+  height: 36px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.title {
+  flex: 1;
+  position: relative;
+  letter-spacing: -0.01em;
+  line-height: 24px;
+  font-weight: 600;
+}
+.root {
+  width: 378px;
+  border-radius: var(--br-7xs);
+  background-color: var(--appuseplunkcom-white);
+  height: 50px;
+  overflow: hidden;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding: var(--padding-9xs) var(--padding-xs) var(--padding-9xs)
+    var(--padding-5xs);
+  box-sizing: border-box;
+  gap: var(--gap-5xs);
+  text-align: left;
+  font-size: var(--font-size-lg);
+  color: var(--wwwuseplunkcom-mine-shaft);
+  font-family: var(--ui-ui-text-14-reg);
+}
+.root[data-property="Analytics_off"],
+.root[data-property="Customers_off"],
+.root[data-property="Mails_off"],
+.root[data-property="Overview_off"],
+.root[data-property="Templates_off"] {
+  background-color: unset;
+}
+.root[data-property="Analytics_off"] .cashIcon,
+.root[data-property="Analytics_on"] .cashIcon {
+  width: 24px;
+  height: 24px;
+}
+.root[data-property="Analytics_off"] .title,
+.root[data-property="Customers_off"] .title,
+.root[data-property="Mails_off"] .title,
+.root[data-property="Overview_off"] .title,
+.root[data-property="Templates_off"] .title {
+  color: var(--color-grey-83);
+}

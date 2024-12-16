@@ -1,0 +1,133 @@
+.heading2 {
+  position: absolute;
+  top: 48px;
+  left: calc(50% - 173.9px);
+  display: flex;
+  color: var(--wwwuseplunkcom-mine-shaft);
+  align-items: center;
+  justify-content: center;
+  width: 349px;
+  height: 40px;
+}
+.weTakeYour {
+  margin: 0;
+}
+.weTakeYourContainer {
+  position: relative;
+  line-height: 24px;
+}
+.container {
+  position: absolute;
+  top: 100px;
+  left: calc(50% - 288px);
+  width: 576px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 0 var(--padding-81xl);
+  box-sizing: border-box;
+  max-width: var(--width-576);
+  font-size: var(--wwwuseplunkcom-inter-regular-size);
+}
+.component1Icon,
+.openSource {
+  position: absolute;
+  top: 212px;
+  left: calc(50% - 256px);
+  width: 32px;
+  height: 32px;
+}
+.openSource {
+  top: 256px;
+  left: calc(50% - 285px);
+  line-height: 20px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 90.2px;
+  height: 20px;
+}
+.seeWhatWereContainer1 {
+  width: 100%;
+}
+.seeWhatWereContainer {
+  position: absolute;
+  top: 287.5px;
+  left: calc(50% - 311.5px);
+  line-height: 20px;
+  color: var(--wwwuseplunkcom-dove-gray);
+  display: flex;
+  align-items: center;
+  width: 143.3px;
+  height: 40px;
+}
+.component1Icon1 {
+  position: absolute;
+  top: 212px;
+  left: calc(50% - 16px);
+  width: 32px;
+  height: 32px;
+}
+.transparency,
+.wereOpenAboutContainer {
+  position: absolute;
+  line-height: 20px;
+  display: flex;
+  align-items: center;
+}
+.transparency {
+  top: 256px;
+  left: calc(50% - 46px);
+  font-weight: 500;
+  justify-content: center;
+  width: 92.4px;
+  height: 20px;
+}
+.wereOpenAboutContainer {
+  top: 287.5px;
+  left: calc(50% - 80.5px);
+  color: var(--wwwuseplunkcom-dove-gray);
+  width: 161.1px;
+  height: 40px;
+}
+.component1Icon2 {
+  position: absolute;
+  top: 212px;
+  left: calc(50% + 224px);
+  width: 32px;
+  height: 32px;
+}
+.privacy,
+.yourDataIsContainer {
+  position: absolute;
+  line-height: 20px;
+  display: flex;
+  align-items: center;
+}
+.privacy {
+  top: 256px;
+  left: calc(50% + 215.1px);
+  font-weight: 500;
+  justify-content: center;
+  width: 50.2px;
+  height: 20px;
+}
+.yourDataIsContainer {
+  top: 287.5px;
+  left: calc(50% + 164.6px);
+  color: var(--wwwuseplunkcom-dove-gray);
+  width: 150.9px;
+  height: 40px;
+}
+.section {
+  align-self: stretch;
+  position: relative;
+  height: 376px;
+  flex-shrink: 0;
+  text-align: center;
+  font-size: var(--ui-ui-text-14-reg-size);
+  color: var(--wwwuseplunkcom-black);
+  font-family: var(--ui-ui-text-14-reg);
+}

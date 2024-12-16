@@ -1,0 +1,91 @@
+.linkSign {
+  position: absolute;
+  top: 10px;
+  left: 1283px;
+  line-height: 24px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  width: 52.2px;
+  height: 24px;
+  cursor: pointer;
+}
+.textInput:focus {
+  outline: none; 
+}
+.nav {
+  align-self: stretch;
+  position: relative;
+  height: 44px;
+  flex-shrink: 0;
+}
+.theOpenSource {
+  margin: 0;
+}
+.theOpenSourceEmailContainer {
+  position: absolute;
+  top: 0;
+  left: calc(50% - 250.5px);
+}
+.heading1 {
+  width: 501px;
+  position: relative;
+  height: 150px;
+}
+.plunkIsTheContainer {
+  position: absolute;
+  top: 0;
+  left: calc(50% - 193.5px);
+  line-height: 24px;
+}
+.container {
+  align-self: stretch;
+  position: relative;
+  height: 72px;
+  font-size: var(--wwwuseplunkcom-inter-regular-size);
+  color: var(--wwwuseplunkcom-black);
+}
+.heading1Parent {
+  position: absolute;
+  top: calc(50% - 121px);
+  left: calc(50% - 288px);
+  width: 576px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 20px;
+}
+.section {
+  align-self: stretch;
+  height: 342px;
+  flex-shrink: 0;
+  text-align: center;
+  font-size: var(--wwwuseplunkcom-semantic-heading-1-size);
+}
+.main,
+.panding1,
+.section {
+  position: relative;
+}
+.panding1 {
+  align-self: stretch;
+  height: 56px;
+  flex-shrink: 0;
+}
+.main {
+  width: 100%;
+  background-color: var(--appuseplunkcom-white);
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 80px var(--padding-13xl) 150px;
+  box-sizing: border-box;
+  min-height: var(--height-1200);
+  text-align: left;
+  font-size: var(--wwwuseplunkcom-inter-regular-size);
+  color: var(--wwwuseplunkcom-mine-shaft);
+  font-family: var(--ui-ui-text-14-reg);
+}

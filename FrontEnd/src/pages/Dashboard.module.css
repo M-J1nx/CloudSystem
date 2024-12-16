@@ -1,0 +1,47 @@
+.dashboard1 {
+  position: absolute;
+  top: 14px;
+  left: 462px;
+  display: flex;
+  align-items: center;
+  width: 270px;
+  height: 62px;
+}
+.lastMails {
+  top: 780px;
+  left: 462px;
+  width: 411px;
+  height: 62px;
+}
+.lastMails,
+.recentTemplates,
+.templateParent {
+  position: absolute;
+  display: flex;
+  align-items: center;
+}
+.templateParent {
+  top: 428px;
+  left: 468px;
+  flex-direction: row;
+  justify-content: flex-start;
+  gap: var(--gap-12xl);
+}
+.recentTemplates {
+  top: 343px;
+  left: 460px;
+  width: 328px;
+  height: 62px;
+}
+.dashboard {
+  width: 100%;
+  position: relative;
+  background-color: var(--appuseplunkcom-white);
+  height: 1200px;
+  overflow-y: auto;
+  text-align: left;
+  font-size: var(--headings-heading-36-bold-size);
+  color: var(--dark-gray-dark-gray-2);
+  font-family: var(--ui-ui-text-14-reg);
+}
+

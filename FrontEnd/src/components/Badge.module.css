@@ -1,0 +1,74 @@
+.badgeChild {
+  width: 10px;
+  position: relative;
+  border-radius: 50%;
+  background-color: var(--color-royalblue);
+  height: 10px;
+}
+.title {
+  position: relative;
+  letter-spacing: -0.01em;
+  line-height: 24px;
+  font-weight: 600;
+}
+.root,
+.title1 {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 0 var(--padding-9xs) 0 0;
+}
+.root {
+  position: absolute;
+  top: calc(50% - 12px);
+  left: calc(50% - 58px);
+  border-radius: var(--br-mini);
+  background-color: var(--color-lavender-100);
+  width: 116px;
+  overflow: hidden;
+  align-items: center;
+  padding: 0 var(--padding-9xs) 0 var(--padding-3xs);
+  box-sizing: border-box;
+  gap: var(--gap-3xs);
+  text-align: left;
+  font-size: var(--ui-ui-text-14-reg-size);
+  color: var(--color-royalblue);
+  font-family: var(--ui-ui-text-14-reg);
+}
+.root[data-property="Succeeded"] {
+  background-color: #EBFFF1;
+}
+.root[data-property="Succeeded"] .badgeChild {
+  background-color: #119C2B;
+}
+.root[data-property="Succeeded"] .title {
+  color: #119C2B;
+}
+.root[data-property="Pending"] {
+  background-color: #FEF9C3;
+}
+.root[data-property="Pending"] .badgeChild {
+  background-color: #FACC15;
+}
+.root[data-property="Pending"] .title {
+  color: #FACC15;
+}
+.root[data-property="Failed"] {
+  background-color: #FEE2E2;
+}
+.root[data-property="Failed"] .badgeChild {
+  background-color: #EF4444;
+}
+.root[data-property="Failed"] .title {
+  color: #EF4444;
+}
+.root[data-property="Total"] {
+  background-color: #DBEAFE;
+}
+.root[data-property="Total"] .badgeChild {
+  background-color: #3053B4;
+}
+.root[data-property="Total"] .title {
+  color: #3053B4;
+}

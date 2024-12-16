@@ -1,0 +1,294 @@
+.textInput {
+  width: 100%;
+  border: none;
+  font-size: 22px;
+  background-color: transparent;
+  color: #262626;
+  box-sizing: border-box;
+}
+.textInput:focus {
+  outline: none;
+}
+.button {
+  align-self: stretch;
+  border-radius: var(--br-7xs);
+  background-color: var(--wwwuseplunkcom-mine-shaft);
+  flex-direction: row;
+  white-space: nowrap;
+  padding: 8px 16px;
+  text-align: center;
+  color: var(--appuseplunkcom-white);
+}
+.signIn1 {
+  flex: 1;
+  position: relative;
+  line-height: 20px;
+  font-size: 14px;
+}
+.divider {
+  position: absolute;
+  height: 100%;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--light-gray-light-gray-3);
+  width: 1px;
+  overflow: hidden;
+}
+.sections {
+  position: absolute;
+  width: calc(100% - 32px);
+  top: 108px;
+  right: 16px;
+  left: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: var(--gap-3xs);
+}
+.chevronIcon,
+.value {
+  position: relative;
+  flex-shrink: 0;
+}
+.value {
+  width: 150px;
+  letter-spacing: -0.01em;
+  line-height: 24px;
+  font-weight: 600;
+  display: inline-block;
+  height: 37px;
+}
+.chevronIcon {
+  width: 35px;
+  height: 35px;
+  overflow: hidden;
+}
+.dropdown,
+.valueIcon {
+  width: 150px;
+  height: 29px;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+.dropdown {
+  position: absolute;
+  top: 27px;
+  left: 16px;
+  border-radius: var(--br-7xs);
+  width: 222px;
+  height: 45px;
+  overflow: hidden;
+  padding: var(--padding-5xs) var(--padding-5xs) var(--padding-5xs)
+    var(--padding-xs);
+  box-sizing: border-box;
+}
+.userIcon {
+  width: 36px;
+  position: relative;
+  height: 36px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.title {
+  flex: 1;
+  position: relative;
+  letter-spacing: -0.01em;
+  line-height: 24px;
+  font-weight: 600;
+}
+.sections1,
+.sidenavItem {
+  display: flex;
+  justify-content: flex-start;
+}
+.sidenavItem {
+  align-self: stretch;
+  border-radius: var(--br-7xs);
+  height: 50px;
+  overflow: hidden;
+  flex-shrink: 0;
+  flex-direction: row;
+  align-items: center;
+  padding: var(--padding-9xs) var(--padding-xs) var(--padding-9xs)
+    var(--padding-5xs);
+  box-sizing: border-box;
+  gap: var(--gap-5xs);
+}
+.sections1 {
+  position: absolute;
+  width: calc(100% - 32px);
+  right: 16px;
+  bottom: 16px;
+  left: 16px;
+  flex-direction: column;
+  align-items: flex-start;
+  font-size: var(--font-size-lg);
+  color: var(--wwwuseplunkcom-mine-shaft);
+}
+.sideNavigation {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: var(--color-whitesmoke-100);
+  width: 410px;
+  height: 1200px;
+  overflow: hidden;
+  font-size: var(--font-size-3xl);
+  font-family: var(--ui-ui-text-14-reg);
+}
+.addYourTemplate {
+  position: absolute;
+  top: 14px;
+  left: 462px;
+  display: flex;
+  align-items: center;
+  width: 661px;
+  height: 62px;
+}
+.paragraphLeftAlignAlternateIcon {
+  position: absolute;
+  top: 110px;
+  left: 467px;
+  width: 48px;
+  height: 48px;
+  overflow: hidden;
+}
+.emailBody,
+.subject {
+  position: absolute;
+  top: 39px;
+  left: 45px;
+  line-height: 24px;
+  font-weight: 600;
+}
+.emailBody {
+  top: 229px;
+}
+.placeholder {
+  flex: 1;
+  position: relative;
+}
+.fieldContent,
+.placeholder1 {
+  position: absolute;
+  display: flex;
+  align-items: center;
+}
+.fieldContent {
+  top: 93px;
+  left: calc(50% - 653px);
+  border-radius: var(--br-5xs);
+  background-color: var(--appuseplunkcom-white);
+  border: 1px solid var(--color-gainsboro-100);
+  box-sizing: border-box;
+  width: 1306px;
+  height: 60px;
+  flex-direction: row;
+  justify-content: flex-start;
+  padding: var(--padding-5xs) var(--padding-mini);
+  font-size: var(--font-size-3xl);
+  color: var(--color-silver-100);
+}
+.placeholder1 {
+  top: calc(50% - 256.5px);
+  left: 15px;
+  width: 1276px;
+}
+.pictureIcon {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+}
+.pictureWrapper {
+  position: absolute;
+  top: 442px;
+  left: 1212px;
+  border-radius: var(--br-3xs);
+  border: 1px solid var(--wwwuseplunkcom-silver-chalice);
+  box-sizing: border-box;
+  width: 70px;
+  height: 70px;
+  overflow: hidden;
+}
+.fieldContent1,
+.subjectParent {
+  position: absolute;
+  top: 288px;
+  left: 45px;
+  border-radius: var(--br-5xs);
+  border: 1px solid var(--color-gainsboro-100);
+  box-sizing: border-box;
+  width: 1306px;
+  height: 537px;
+  font-size: var(--font-size-lg);
+  color: var(--color-silver-100);
+}
+.subjectParent {
+  top: 110px;
+  left: 467px;
+  border-radius: var(--br-3xs);
+  border: 1px solid var(--wwwuseplunkcom-silver-chalice);
+  width: 1396px;
+  height: 875px;
+  overflow: hidden;
+  font-size: var(--font-size-13xl);
+  color: var(--wwwuseplunkcom-black);
+}
+.save {
+  align-self: stretch;
+  position: relative;
+  line-height: 21px;
+  font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.depth5Frame1,
+.depth5Frame2,
+.depth6Frame0 {
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.depth5Frame1,
+.depth5Frame2 {
+  position: absolute;
+  top: 1018px;
+  left: 1644px;
+  border-radius: var(--br-xl);
+  background-color: var(--wwwuseplunkcom-mine-shaft);
+  width: 220px;
+  height: 45px;
+  flex-direction: row;
+  padding: 0 var(--padding-5xs) 0 var(--padding-base);
+  box-sizing: border-box;
+  min-width: 84px;
+  max-width: 480px;
+  text-align: center;
+  color: var(--appuseplunkcom-white);
+}
+.depth5Frame2 {
+  left: 1393px;
+  background-color: var(--color-whitesmoke-100);
+  color: var(--color-gray-200);
+}
+.templateEdit {
+  width: 100%;
+  position: relative;
+  background-color: var(--appuseplunkcom-white);
+  height: 1200px;
+  overflow-y: auto;
+  text-align: left;
+  font-size: var(--wwwuseplunkcom-inter-regular-size);
+  color: var(--dark-gray-dark-gray-2);
+  font-family: var(--font-pretendard);
+}

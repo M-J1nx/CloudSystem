@@ -1,0 +1,81 @@
+.dotsIcon,
+.icon {
+  position: relative;
+}
+.icon {
+  width: 48px;
+  border-radius: var(--br-9xl);
+  height: 48px;
+  z-index: 0;
+}
+.dotsIcon {
+  width: 20px;
+  height: 20px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.dotsVertical {
+  margin: 0 !important;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  z-index: 1;
+}
+.heading {
+  align-self: stretch;
+  position: relative;
+  line-height: 20px;
+  font-weight: 500;
+}
+.number {
+  flex: 1;
+  position: relative;
+  letter-spacing: -0.02em;
+  line-height: 44px;
+  font-weight: 600;
+}
+.badgeWrap {
+  width: 71px;
+  height: 32px;
+}
+.numberAndBadge {
+  align-self: stretch;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  justify-content: flex-start;
+  gap: var(--gap-base);
+  font-size: var(--headings-heading-36-bold-size);
+  color: var(--color-gray-100);
+  font-family: var(--font-pretendard);
+}
+.card2,
+.headingAndNumber {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+.headingAndNumber {
+  align-self: stretch;
+  gap: var(--gap-5xs);
+  z-index: 2;
+}
+.card2 {
+  width: 444px;
+  border-radius: var(--br-xs);
+  background-color: var(--appuseplunkcom-white);
+  border: 1px solid var(--color-lavender-200);
+  box-sizing: border-box;
+  padding: var(--padding-5xl);
+  position: relative;
+  gap: var(--gap-5xl);
+  text-align: left;
+  font-size: var(--ui-ui-text-14-reg-size);
+  color: var(--color-darkslategray-100);
+  font-family: var(--ui-ui-text-14-reg);
+}
