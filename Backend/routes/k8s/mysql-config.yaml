@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mysql-config
+  namespace: db-namespace
+data:
+  MYSQL_DATABASE: cloudsystem
+
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: mysql-secret
+  namespace: db-namespace
+type: Opaque
+stringData:
+  MYSQL_ROOT_PASSWORD: "cloudsystem"
+  MYSQL_USER: "admin"
+  MYSQL_PASSWORD: "cloudsystem"
