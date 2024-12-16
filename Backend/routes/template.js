@@ -4,11 +4,11 @@ const connection = require('../db');
 
 // 템플릿 생성 API
 router.post('/', (req, res) => {
-    const { eventid, templateName, mailTitle, mailContent, reserveTime } = req.body;
+    const { templateName, mailContent } = req.body;
 
-    const query = 'INSERT INTO Template (event_id, template_name, mail_title, mail_content, reserve_time) VALUES (?, ?, ?, ?, ?)';
+    const query = 'INSERT INTO Template (template_name, mail_content) VALUES (?, ?)';
     
-    connection.query(query, [eventid, templateName, mailTitle, mailContent, reserveTime], (err) => {
+    connection.query(query, [templateName, mailContent], (err) => {
         if (err) {
             console.error('템플릿 생성 중 오류:', err);
             return res.status(500).json({ message: '서버 내부 오류' });
@@ -52,6 +52,43 @@ router.get('/:template_name', (req, res) => {
         });
     });
 });
+
+// 템플릿 목록 불러오기
+router.get('/list/result', (req, res) => {
+    const query = 'SELECT * FROM Template';
+
+    connection.query(query, (err, results) => {
+        if (err) {
+            console.error('불러오기 중 오류:', err);
+            return res.status(500).json({ message: '서버 내부 오류' });
+        }
+
+        return res.status(200).json(
+            results.map(template => ({
+                id: template.template_id,
+                templateName: template.template_name,
+                mailContent: template.mail_content,
+            }))
+        );
+    });
+});
+
+// 템플릿 수정 API
+router.post('/:template_name/edit', (req, res) => {
+    const { templateName, mailContent } = req.body;
+
+    const query = 'INSERT INTO Template (template_name, mail_content) VALUES (?, ?)';
+    
+    connection.query(query, [templateName, mailContent], (err) => {
+        if (err) {
+            console.error('템플릿 생성 중 오류:', err);
+            return res.status(500).json({ message: '서버 내부 오류' });
+        }
+
+        res.status(201).json({ message: '템플릿이 성공적으로 생성되었습니다.'});
+    });
+});
+
 
 // 이미지 처리를 위한 multer 사용
 const multer = require('multer');

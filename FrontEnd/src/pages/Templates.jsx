@@ -5,8 +5,29 @@ import SidenavItem from "../components/SidenavItem";
 import Template from "../components/Template";
 import styles from "./Templates.module.css";
 
+import axios from "axios";
+import { useState, useEffect } from "react";
+
 const Templates = () => {
   const navigate = useNavigate();
+
+  const [templates, setTemplates] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  // 템플릿 목록 불러오기
+  const callTemplates = async () => {
+    try {
+      const response = await axios.get("http://localhost:3000/template/list/result");
+      setTemplates(response.data);
+      setLoading(false);
+    } catch (error) {
+      setLoading(false);
+    }
+  }
+
+  useEffect(() => {
+    callTemplates(); 
+  }, []);
 
   const onSidenavItemContainerClick = useCallback(() => {
     navigate("/dashboard");
@@ -90,10 +111,14 @@ const Templates = () => {
         Templates
       </Typography>
       <Box className={styles.templateParent}>
-        <Template
-          heading="Discover our new app"
-          heading1="Hello, this is a cloud system class project."
-        />
+        {templates.map((template) => ( 
+            <Template
+              key={template.id} 
+              heading={template.templateName}
+              heading1={template.mailContent}
+            />
+          ))
+        }
       </Box>
       <Box className={styles.button} onClick={onButtonContainerClick}>
         <Box className={styles.buttonTitle}>
