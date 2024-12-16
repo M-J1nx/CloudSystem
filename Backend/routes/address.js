@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const connection = require('../db');
+const axios = require('axios');
+const nodemailer = require('nodemailer');
 
 // 주소록 추가
 router.post('/:event_id', (req, res) => {
@@ -186,5 +188,97 @@ router.delete('/:event_id', (req, res) => {
        );
    });
 });
+
+// user id로 내 email 주소 받아오기
+router.get('/getemail/:user_id', (req, res) => {
+    const { user_id } = req.params;
+
+    if (!user_id) {
+        return res.status(400).json({message: '잘못된 요청입니다.', mailTitle, mailContent});
+    }
+
+    connection.query(
+        'SELECT user_email FROM Company WHERE user_id = ?', [user_id],
+        (err, results) => {
+            if (err) {
+                console.error('이메일 조회 중 오류:', err);
+                return res.status(500).json({ message: '서버 내부 오류' });
+            }
+
+            if (results.length === 0) {
+                return res.status(404).json({ message: '해당 사용자의 이메일을 찾을 수 없습니다.' });
+            }
+
+            // 이메일 주소 반환
+            res.status(200).json({
+                message: '이메일 주소 조회 성공',
+                email: results[0].user_email
+            });
+        }
+    );
+})
+
+// 주소록으로 이메일 전송 API
+router.post('/sendemail/:event_id', async (req, res) => {
+    const { event_id } = req.params;
+    const { mailTitle, mailContent, reserveTime, user_id, gmailPassword } = req.body;
+
+    if (!mailTitle || !mailContent) {
+        return res.status(400).json({ message: '잘못된 요청입니다.', mailTitle, mailContent });
+    }
+
+    try {
+        // 전송할 이메일 조회 API 호출
+        const emailAddress = await axios.get(`http://localhost:3000/address/${event_id}`);
+
+        if (!emailAddress.data || !emailAddress.data.data || emailAddress.data.data.length === 0) {
+            return res.status(404).json({ message: '이메일 주소가 존재하지 않습니다.' });
+        }
+
+        // 이메일 주소 리스트 추출
+        const emailList = emailAddress.data.data.map((address) => address.ADDRESS_EMAIL);
+
+        // 발신자 이메일 조회 API 호출
+        const myemailAddress = await axios.get(`http://localhost:3000/address/getemail/${user_id}`);
+
+        if (!myemailAddress.data.email) {
+            return res.status(404).json({ message: '발신자 이메일을 찾을 수 없습니다.' });
+        }
+
+        // 이메일 전송을 위한 Nodemailer 설정
+        const transporter = nodemailer.createTransport({
+            service: 'gmail', 
+            auth: {
+                user: myemailAddress.data.email, 
+                pass: gmailPassword, 
+            },
+        });
+
+        const mailOptions = {
+            from: myemailAddress.data.user_email, 
+            to: emailList, 
+            subject: mailTitle,
+            text: mailContent,
+            sendAt: reserveTime, 
+        };
+
+        // 이메일 전송
+        transporter.sendMail(mailOptions, (error, info) => {
+            if (error) {
+                console.log(error);
+                return res.status(500).json({ message: '이메일 전송에 실패했습니다.' });
+            }
+            res.status(200).json({
+                message: '이메일이 성공적으로 전송되었습니다.',
+                info: info
+            });
+        });
+
+    } catch (error) {
+        console.error('이메일 전송 중 오류:', error);
+        res.status(500).json({ message: '서버 내부 오류' });
+    }
+});
+
 
 module.exports = router;
