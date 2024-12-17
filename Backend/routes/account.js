@@ -20,7 +20,7 @@ router.post('/signup', (req, res) => {
 
 // 로그인 API
 router.get('/login', (req, res) => {
-    const { id, password } = req.body;
+    const { id, password } = req.query;
 
     if (!id || !password) {
         return res.status(400).json({ message: '아이디와 비밀번호를 입력해주세요.' });
