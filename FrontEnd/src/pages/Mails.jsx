@@ -159,7 +159,7 @@ const Mails = () => {
           <MailRow
             key={mail.event_id}
             property={mail.status}
-            title={mail.title}
+            title={mail.event_name}
             customer={mail.address_email}
             date={mail.send_at}
           />

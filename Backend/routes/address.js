@@ -298,7 +298,7 @@ router.post('/sendemail/:event_id', async (req, res) => {
             try {
                 // 이메일 전송 정보를 DB에 저장
                 const date = new Date().toISOString().slice(0, 19).replace('T', ' '); // 현재 시간 포맷
-                const status = true; // 전송 성공 시 true
+                const status = "true"; // 전송 성공 시 true
                 for (const email of emailList) {
                     await connection.query(query, [event_id, email, date, status]);
                 }
@@ -322,9 +322,10 @@ router.post('/sendemail/:event_id', async (req, res) => {
 
 // 전체 전송 결과 불러오기
 router.get('/send/result', (req, res) => {
-    // 이메일 전송 결과를 필요한 형식으로 반환
+    // 이메일 전송 결과와 관련된 event_name을 가져오는 쿼리
     connection.query(
-        'SELECT * FROM Send',
+        'SELECT Send.*, Event.event_name FROM Send ' +
+        'JOIN Event ON Send.event_id = Event.event_id', // Send와 Event 테이블을 event_id를 기준으로 조인
         (err, result) => {
             if (err) {
                 console.error('결과 조회 중 오류:', err);
@@ -339,6 +340,7 @@ router.get('/send/result', (req, res) => {
         }
     );
 });
+
 
 
 
