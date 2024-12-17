@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: email-config
+  namespace: company-a-namespace
+data:
+  email-subject: "Welcome to Company A!"
+  email-template: "Hello, this is your welcome email from Company A."
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: email-config
+  namespace: company-b-namespace
+data:
+  email-subject: "Welcome to Company B!"
+  email-template: "Hello, this is your welcome email from Company B."
