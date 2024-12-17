@@ -1,4 +1,4 @@
-import { useCallback } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Box, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import SidenavItem from "../components/SidenavItem";
@@ -7,6 +7,52 @@ import styles from "./Campaigns.module.css";
 
 const Campaigns = () => {
   const navigate = useNavigate();
+  const [events, setEvents] = useState([]);
+  const [error, setError] = useState("");
+  const [user, setUser] = useState(null);
+  
+  useEffect(() => {
+    try {
+      const userStr = localStorage.getItem('user');
+      if (!userStr) {
+        navigate('/sign-in', { replace: true });
+        return;
+      }
+
+      const userObj = JSON.parse(userStr);
+      setUser(userObj);
+
+      const fetchEvents = async () => {
+        try {
+          // userObj.user_id가 제대로 전달되는지 확인을 위한 콘솔 로그
+          console.log("Fetching events for user:", userObj.user_id);
+          const response = await fetch(`http://localhost:3000/event?user_id=${userObj.user_id}`, {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json',
+            }
+          });
+          
+          if (!response.ok) {
+            throw new Error('서버 응답 오류');
+          }
+          
+          const data = await response.json();
+          console.log("Received events:", data); // 받아온 데이터 확인
+          setEvents(data.data || []);
+        } catch (err) {
+          setError("서버 연결에 실패했습니다.");
+          console.error("Failed to fetch events:", err);
+        }
+      };
+
+      fetchEvents();
+    } catch (err) {
+      console.error("Error parsing user data:", err);
+      localStorage.removeItem('user');
+      navigate('/sign-in', { replace: true });
+    }
+  }, [navigate]);
 
   const onSidenavItemContainerClick = useCallback(() => {
     navigate("/dashboard");
@@ -24,13 +70,18 @@ const Campaigns = () => {
     navigate("/templates");
   }, [navigate]);
 
-  const onDepth5FrameClick = useCallback(() => {
-    navigate("/campaigns-add");
-  }, [navigate]);
-
   const onButtonContainerClick = useCallback(() => {
     navigate("/campaigns-add");
   }, [navigate]);
+
+  const handleLogout = useCallback(() => {
+    localStorage.removeItem('user');
+    navigate('/sign-in', { replace: true });
+  }, [navigate]);
+
+  if (!user) {
+    return null;
+  }
 
   return (
     <Box className={styles.campaigns}>
@@ -74,7 +125,7 @@ const Campaigns = () => {
           </Box>
         </Box>
         <Box className={styles.sections1}>
-          <Box className={styles.sidenavItem}>
+          <Box className={styles.sidenavItem} onClick={handleLogout}>
             <img className={styles.userIcon} alt="" src="/user.svg" />
             <Box className={styles.title}>Logout</Box>
           </Box>
@@ -84,12 +135,7 @@ const Campaigns = () => {
         className={styles.campaigns1}
         variant="inherit"
         component="b"
-        sx={{
-          fontSize: "var(--headings-heading-36-bold-size)",
-          lineHeight: "48px",
-          letterSpacing: "-0.02em",
-          fontWeight: "700",
-        }}
+        sx={{ fontSize: "var(--headings-heading-36-bold-size)", lineHeight: "48px", letterSpacing: "-0.02em", fontWeight: "700" }}
       >
         Campaigns
       </Typography>
@@ -99,10 +145,26 @@ const Campaigns = () => {
           <Box className={styles.buttonTitle1}>Add</Box>
         </Box>
       </Box>
+      {error && (
+        <Box sx={{ color: 'red', textAlign: 'center', mb: 2 }}>
+          {error}
+        </Box>
+      )}
       <Box className={styles.campaignParent}>
-        <Campaign onDepth5FrameClick={onDepth5FrameClick} />
-        <Campaign />
-        <Campaign />
+        {events.length > 0 ? (
+          events.map((event) => (
+            <Campaign 
+              key={event.EVENT_ID}
+              event_id={event.EVENT_ID}
+              event_name={event.EVENT_NAME}
+              onDepth5FrameClick={() => navigate(`/campaigns-edit/${event.EVENT_ID}`)}
+            />
+          ))
+        ) : (
+          <Box sx={{ textAlign: 'center', width: '100%', py: 3 }}>
+            등록된 이벤트가 없습니다.
+          </Box>
+        )}
       </Box>
     </Box>
   );

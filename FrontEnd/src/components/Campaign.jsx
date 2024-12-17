@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
 import styles from "./Campaign.module.css";
 
-const Campaign = ({ className = "", onDepth5FrameClick }) => {
+const Campaign = ({ className = "", onDepth5FrameClick, event_name }) => {
   const navigate = useNavigate();
 
   const onDepth5FrameClick1 = useCallback(() => {
@@ -16,7 +16,7 @@ const Campaign = ({ className = "", onDepth5FrameClick }) => {
       <Box className={styles.iconParent}>
         <img className={styles.icon} alt="" src="/icon.svg" />
         <Box className={styles.headingAndNumber}>
-          <Box className={styles.heading}>Test</Box>
+          <Box className={styles.heading}>{event_name}</Box>
         </Box>
       </Box>
       <Box className={styles.headingAndNumber1}>
@@ -33,7 +33,7 @@ const Campaign = ({ className = "", onDepth5FrameClick }) => {
 
 Campaign.propTypes = {
   className: PropTypes.string,
-
+  event_name: PropTypes.string,
   /** Action props */
   onDepth5FrameClick: PropTypes.func,
 };

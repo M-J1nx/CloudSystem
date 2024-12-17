@@ -35,9 +35,12 @@ const SignIn = () => {
       const data = await response.json();
 
       if (response.ok) {
-        // 로그인 성공
+        // 로그인 성공시 localStorage에 사용자 정보 저장
+        localStorage.setItem('user', JSON.stringify({
+          user_id: formData.id,
+          // 필요한 경우 서버에서 받은 추가 데이터도 저장
+        }));
         navigate("/dashboard");
-      } else {
         // 로그인 실패
         setError(data.message || "로그인에 실패했습니다.");
       }
