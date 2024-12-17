@@ -123,6 +123,26 @@ router.get('/:event_id', (req, res) => {
    );
 });
 
+// 전체 주소록 조회
+router.get('/', (req, res) => {
+    // 전체 주소록 조회 쿼리
+    connection.query(
+        'SELECT * FROM Address', // 이벤트와 관계 없이 모든 주소록 조회
+        (err, addresses) => {
+            if (err) {
+                console.error('주소록 조회 중 오류:', err);
+                return res.status(500).json({ message: '서버 내부 오류' });
+            }
+
+            res.status(200).json({
+                message: '주소록 조회 성공',
+                data: addresses
+            });
+        }
+    );
+});
+
+
 // 주소록 삭제
 router.delete('/:event_id', (req, res) => {
    const event_id = req.params.event_id;
