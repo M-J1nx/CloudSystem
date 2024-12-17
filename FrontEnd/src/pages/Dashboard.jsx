@@ -1,9 +1,12 @@
+import { useState, useEffect } from "react";
 import { Typography, Box } from "@mui/material";
 import SideNavigation from "../components/SideNavigation";
 import Table from "../components/Table";
 import Template from "../components/Template";
 import Stats from "../components/Stats";
 import styles from "./Dashboard.module.css";
+import axios from "axios";
+
 
 const Dashboard = () => {
   const tableData = [
@@ -33,6 +36,21 @@ const Dashboard = () => {
     },
   ];
 
+  // template 불러오기 
+  const [templates, setTemplates] = useState([]);
+  const fetchTemplates = async () => {
+    try {
+      const response = await axios.get("http://localhost:3000/template/list/result");  // API 엔드포인트 수정
+      setTemplates(response.data);  // 템플릿 데이터를 상태로 저장
+    } catch (error) {
+      console.error("Failed to fetch templates:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchTemplates();  // 컴포넌트가 마운트되면 템플릿 데이터를 불러옴
+  }, []);
+
   return (
     <Box className={styles.dashboard}>
       <SideNavigation />
@@ -46,12 +64,13 @@ const Dashboard = () => {
       </Typography>
       <Stats />
       <Box className={styles.templateParent}>
-        <Template
-          heading="Discover our new app"
-          heading1="Hello, this is a cloud system class project."
-        />
-        <Template heading="Hello" heading1="hello" />
-        <Template heading="Bye" heading1="bye" />
+        {templates.map((template) => (
+          <Template
+            key={template.id}  // 템플릿 고유의 id를 key로 사용
+            heading={template.templateName}  // API에서 가져온 템플릿 이름
+            heading1={template.mailContent}  // API에서 가져온 메일 내용
+          />
+        ))}
       </Box>
       <Typography
         className={styles.recentTemplates}
