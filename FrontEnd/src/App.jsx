@@ -5,6 +5,7 @@ import {
   useNavigationType,
   useLocation,
 } from "react-router-dom";
+
 import Main from "./pages/Main";
 import Dashboard from "./pages/Dashboard";
 import Customers from "./pages/Customers";
@@ -15,6 +16,7 @@ import SignIn from "./pages/SignIn";
 import Campaigns from "./pages/Campaigns";
 import Templates from "./pages/Templates";
 import TemplateEdit from "./pages/TemplateEdit";
+import TemplateAdd from "./pages/TemplateAdd";
 import Mails from "./pages/Mails";
 
 function App() {
@@ -73,10 +75,14 @@ function App() {
         title = "";
         metaDescription = "";
         break;
-      case "/template-edit":
+      case "/template-add":
         title = "";
         metaDescription = "";
         break;
+        case "/template-edit":
+          title = "";
+          metaDescription = "";
+          break;
       case "/mails":
         title = "";
         metaDescription = "";
@@ -109,7 +115,8 @@ function App() {
       <Route path="/sign-in" element={<SignIn />} />
       <Route path="/campaigns" element={<Campaigns />} />
       <Route path="/templates" element={<Templates />} />
-      <Route path="/template-edit" element={<TemplateEdit />} />
+      <Route path="/template-add" element={<TemplateAdd />} />
+      <Route path="/templates/:templateName/edit" element={<TemplateEdit />} />
       <Route path="/mails" element={<Mails />} />
     </Routes>
   );

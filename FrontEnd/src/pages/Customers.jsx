@@ -1,12 +1,17 @@
 import { Box, Typography } from "@mui/material";
-import { useCallback } from "react";
+import { useCallback, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import SidenavItem from "../components/SidenavItem";
 import CustomerRow from "../components/CustomerRow";
 import styles from "./Customers.module.css";
+import axios from "axios";
 
 const Customers = () => {
   const navigate = useNavigate();
+
+  const [customers, setCustomers] = useState([]); // 고객 데이터 상태 변수
+  const [loading, setLoading] = useState(true); // 로딩 상태 변수
+  const [error, setError] = useState(null); // 에러 상태 변수
 
   const onSidenavItemContainerClick = useCallback(() => {
     navigate("/dashboard");
@@ -24,23 +29,22 @@ const Customers = () => {
     navigate("/campaigns");
   }, [navigate]);
 
-  const customerData = [
-    {
-      email: "nvt.isst.nute@gmail.com",
-      name: "Harrison Jayden",
-      position: "Student",
-    },
-    {
-      email: "thuhang.nute@gmail.com",
-      name: "Murphy Kenna",
-      position: "Professor",
-    },
-    {
-      email: "nvt.isst.nute@gmail.com",
-      name: "Mahoney Candace",
-      position: "Principal",
-    },
-  ];
+  // 고객 데이터 호출
+  useEffect(() => {
+    const fetchCustomers = async () => {
+      try {
+        // 서버에서 고객 데이터 가져오기
+        const response = await axios.get("http://localhost:3000/address");
+        setCustomers(response.data.data); // 고객 데이터를 상태에 저장
+      } catch (err) {
+        setError("고객 데이터를 가져오는 데 실패했습니다."); // 에러 처리
+      } finally {
+        setLoading(false); // 로딩 종료
+      }
+    };
+
+    fetchCustomers();
+  }, []);
 
   return (
     <Box className={styles.customers}>
@@ -118,7 +122,7 @@ const Customers = () => {
       </Box>
 
       <Box className={styles.mailCatalog}>
-      <Box className={styles.row}>
+        <Box className={styles.row}>
           <Box className={styles.cellCheckbox}>
             <Box className={styles.checkbox} />
             <Box className={styles.divider2} />
@@ -138,12 +142,12 @@ const Customers = () => {
             </Box>
           </Box>
         </Box>
-        {customerData.map((customer, index) => (
+        {customers.map((customer, index) => ( // 수정된 부분: 'customers' 상태 사용
           <CustomerRow
             key={index}
-            email={customer.email}
-            name={customer.name}
-            position={customer.position}
+            email={customer.ADDRESS_EMAIL} // 수정된 부분: customer email 데이터 바인딩
+            name={customer.ADDRESS_NAME} // 수정된 부분: customer name 데이터 바인딩
+            position={customer.ADDRESS_POSITION}
           />
         ))}
       </Box>

@@ -2,7 +2,16 @@ import { Box } from "@mui/material";
 import PropTypes from "prop-types";
 import styles from "./Template.module.css";
 
-const Template = ({ className = "", heading, heading1 }) => {
+import { useNavigate } from "react-router-dom";
+
+const Template = ({ className = "", heading, heading1, templateName }) => {
+  const navigate = useNavigate();
+
+  const handleEditClick = () => {
+    // 템플릿 수정 페이지로 이동
+    navigate(`/templates/${heading}/edit`);  // 템플릿 이름을 URL에 전달
+  };
+
   return (
     <Box className={[styles.template, className].join(" ")}>
       <Box className={styles.iconParent}>
@@ -16,7 +25,7 @@ const Template = ({ className = "", heading, heading1 }) => {
       </Box>
       <Box className={styles.depth5Frame1}>
         <Box className={styles.depth6Frame0}>
-          <Box className={styles.edit}>Edit</Box>
+          <Box className={styles.edit} onClick={handleEditClick}>Edit</Box>
         </Box>
       </Box>
     </Box>
