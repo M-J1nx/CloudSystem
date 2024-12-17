@@ -313,3 +313,24 @@
   color: var(--dark-gray-dark-gray-2);
   font-family: var(--ui-ui-text-14-reg);
 }
+.buttonContainer {
+  display: flex;
+  gap: 16px;  /* 버튼 사이 간격 */
+  justify-content: flex-end;  /* 오른쪽 정렬 */
+  margin-top: 20px;  /* 위 여백 */
+}
+
+.actionButton {
+  padding: 8px 24px;
+  background-color: #007bff;  /* 또는 원하는 색상 */
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.actionButton:hover {
+  background-color: #0056b3;  /* 호버 효과 */
+}
+
+.buttonText {
+  color: white;
+}

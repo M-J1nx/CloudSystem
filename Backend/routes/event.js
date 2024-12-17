@@ -69,4 +69,29 @@ router.get('/:event_id', (req, res) => {
     });
 });
 
+// 이벤트 수정
+router.put('/:event_id', (req, res) => {
+    const event_id = req.params.event_id;
+    const { event_name } = req.body;
+
+    // USER_ID 업데이트 제거, EVENT_NAME만 업데이트
+    const query = 'UPDATE Event SET EVENT_NAME = ? WHERE EVENT_ID = ?';
+    
+    connection.query(query, [event_name, event_id], (err, results) => {
+        if (err) {
+            console.error('이벤트 수정 중 오류:', err);
+            return res.status(500).json({ message: '서버 내부 오류' });
+        }
+
+        if (results.affectedRows === 0) {
+            return res.status(404).json({ message: '존재하지 않는 이벤트입니다.' });
+        }
+
+        res.status(200).json({
+            message: '이벤트가 수정되었습니다.',
+            data: { event_id, event_name }
+        });
+    });
+});
+
 module.exports = router;

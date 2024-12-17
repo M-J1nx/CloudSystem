@@ -34,6 +34,11 @@ function App() {
     let title = "";
     let metaDescription = "";
 
+    if (pathname.startsWith('/campaigns-edit/')) {  // 동적 경로
+      title = "";
+      metaDescription = "";
+    }
+
     switch (pathname) {
       case "/":
         title = "";
@@ -109,7 +114,7 @@ function App() {
       <Route path="/dashboard" element={<Dashboard />} />
       <Route path="/main" element={<Main />} />
       <Route path="/customers" element={<Customers />} />
-      <Route path="/campaigns-edit" element={<CampaignsEdit />} />
+      <Route path="/campaigns-edit/:event_id" element={<CampaignsEdit />} />
       <Route path="/campaigns-add" element={<CampaignsAdd />} />
       <Route path="/create-account" element={<CreateAccount />} />
       <Route path="/sign-in" element={<SignIn />} />
