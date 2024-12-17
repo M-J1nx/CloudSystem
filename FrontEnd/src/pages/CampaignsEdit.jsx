@@ -194,13 +194,16 @@ const CampaignsEdit = () => {
             onChange={handleInputChange}
           />
         </Box>
-        <TextField
-          label="Gmail Password"
-          type="password"
-          value={gmailPassword}
-          onChange={(e) => setGmailPassword(e.target.value)}
-          sx={{ marginTop: 2 }}
-        />
+        <Box className={styles.password}>Password</Box>
+        <Box className={styles.fieldContent2}>
+          <input
+            className={styles.textInput}
+            label="Gmail Password"
+            type="password"
+            value={gmailPassword}
+            onChange={(e) => setGmailPassword(e.target.value)}
+          />
+      </Box>
         <Box className={styles.emailBody}>Email Body</Box>
         <Box className={styles.fieldContent1}>
           <input
@@ -216,15 +219,15 @@ const CampaignsEdit = () => {
         </Box>
       </Box>
       <Box className={styles.buttonContainer}>
-        <Box className={styles.actionButton} onClick={handleSubmit}>
+        <Box className={styles.button} onClick={handleSubmit}>
           <Box className={styles.buttonText}>Save</Box>
         </Box>
-        <Box className={styles.actionButton} onClick={() => navigate('/campaigns')}>
+        <Box className={styles.button} onClick={() => navigate('/campaigns')}>
           <Box className={styles.buttonText}>Close</Box>
         </Box>
-        <Button variant="contained" onClick={handleSendEmail} sx={{ marginLeft: 2 }}>
-          Send
-        </Button>
+        <Box className={styles.button} variant="contained" onClick={handleSendEmail}>
+        <Box className={styles.buttonText}>Send</Box>
+        </Box>
       </Box>
     </Box>
   );

@@ -132,15 +132,17 @@
   height: 62px;
 }
 .emailBody,
+.password,
 .statistic,
 .subject {
   position: absolute;
-  top: 39px;
+  top: 40px;
   left: 45px;
   line-height: 24px;
   font-weight: 600;
 }
 .emailBody,
+.password,
 .statistic {
   top: 229px;
 }
@@ -236,6 +238,7 @@
   position: relative;
 }
 .fieldContent1,
+.fieldContent2,
 .subjectParent {
   position: absolute;
   box-sizing: border-box;
@@ -247,6 +250,21 @@
   border: 1px solid var(--color-gainsboro-100);
   width: 1306px;
   height: 317px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: var(--padding-xs) var(--padding-mini);
+  font-size: var(--font-size-lg);
+  color: var(--color-silver-100);
+}
+.fieldContent2 {
+  top: 300px;
+  left: 45px;
+  border-radius: var(--br-5xs);
+  border: 1px solid var(--color-gainsboro-100);
+  width: 1306px;
+  height: 60px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -331,6 +349,19 @@
   background-color: #0056b3;  /* 호버 효과 */
 }
 
-.buttonText {
-  color: white;
+.button{
+  top: 32px;
+  right: 213px;
+  border-radius: var(--br-7xs);
+  background-color: var(--appuseplunkcom-white);
+  border: 1px solid var(--light-gray-light-gray-2);
+  width: 124px;
+  height: 42px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--padding-9xs) var(--padding-xs) var(--padding-9xs)
+    var(--padding-5xs);
 }
