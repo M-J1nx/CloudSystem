@@ -343,3 +343,15 @@
   color: var(--dark-gray-dark-gray-2);
   font-family: var(--ui-ui-text-14-reg);
 }
+
+.textInput {
+  width: 100%;
+  border: none;
+  font-size: 22px;
+  background-color: transparent;
+  color: #262626;
+  box-sizing: border-box;
+}
+.textInput:focus {
+  outline: none;
+}

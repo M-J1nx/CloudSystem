@@ -1,13 +1,34 @@
-import { useCallback } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Box, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import SidenavItem from "../components/SidenavItem";
 import Badge from "../components/Badge";
 import MailRow from "../components/MailRow";
 import styles from "./Mails.module.css";
+import axios from 'axios';
 
 const Mails = () => {
   const navigate = useNavigate();
+
+  const [mailsData, setMailsData] = useState([]);  // mailsData 상태를 추가
+  const [loading, setLoading] = useState(true);    // 로딩 상태 추가
+  const [error, setError] = useState(null); 
+
+  useEffect(() => {
+    const fetchMails = async () => {
+      try {
+        // API 호출 (여기서는 "/send/result" 엔드포인트로 요청)
+        const response = await axios.get('http://localhost:3000/address/send/result');  // 실제 API URL로 변경
+        setMailsData(response.data.data);  // 데이터 상태 업데이트
+      } catch (err) {
+        setError('메일 데이터를 불러오는 데 실패했습니다.');  // 에러 처리
+      } finally {
+        setLoading(false);  // 로딩 상태 업데이트
+      }
+    };
+
+    fetchMails();
+  }, []);
 
   const onSidenavItemContainerClick = useCallback(() => {
     navigate("/dashboard");
@@ -25,32 +46,6 @@ const Mails = () => {
     navigate("/campaigns");
   }, [navigate]);
 
-  const mailsData = [
-    {
-      property: "Failed",
-      title: "Invoice 6B1E73DA–0017",
-      customer: "manhhachkt08@gmail.com",
-      date: "Dec 30, 09:42 PM",
-    },
-    {
-      property: "Succeeded",
-      title: "Invoice 6B1E73DA–0017",
-      customer: "trungkienspktnd@gamail.com",
-      date: "Dec 29, 09:42 PM",
-    },
-    {
-      property: "Succeeded",
-      title: "Invoice 6B1E73DA–0017",
-      customer: "danghoang87hl@gmail.com",
-      date: "Dec 28, 11:14 PM",
-    },
-    {
-      property: "Succeeded",
-      title: "Invoice 6B1E73DA–0017",
-      customer: "trungkienspktnd@gamail.com",
-      date: "Dec 27, 09:42 PM",
-    },
-  ];
 
   return (
     <Box className={styles.mails}>
@@ -162,11 +157,11 @@ const Mails = () => {
         {/* Dynamic Mail Rows */}
         {mailsData.map((mail, index) => (
           <MailRow
-            key={index}
-            property={mail.property}
+            key={mail.event_id}
+            property={mail.status}
             title={mail.title}
-            customer={mail.customer}
-            date={mail.date}
+            customer={mail.address_email}
+            date={mail.send_at}
           />
         ))}
       </Box>

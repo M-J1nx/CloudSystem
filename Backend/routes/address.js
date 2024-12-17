@@ -267,31 +267,51 @@ router.post('/sendemail/:event_id', async (req, res) => {
 
         // 이메일 전송을 위한 Nodemailer 설정
         const transporter = nodemailer.createTransport({
-            service: 'gmail', 
+            service: 'gmail',
             auth: {
-                user: myemailAddress.data.email, 
-                pass: gmailPassword, 
+                user: myemailAddress.data.email,
+                pass: gmailPassword,
             },
         });
 
         const mailOptions = {
-            from: myemailAddress.data.user_email, 
-            to: emailList, 
+            from: myemailAddress.data.user_email,
+            to: emailList,
             subject: mailTitle,
             text: mailContent,
-            sendAt: reserveTime, 
+            sendAt: reserveTime,
         };
 
         // 이메일 전송
-        transporter.sendMail(mailOptions, (error, info) => {
+        transporter.sendMail(mailOptions, async (error, info) => {
             if (error) {
                 console.log(error);
                 return res.status(500).json({ message: '이메일 전송에 실패했습니다.' });
             }
-            res.status(200).json({
-                message: '이메일이 성공적으로 전송되었습니다.',
-                info: info
-            });
+
+            // 이메일 전송 성공 시 전송 결과를 데이터베이스에 저장
+            const query = `
+                INSERT INTO Send (event_id, address_email, send_at, status)
+                VALUES (?, ?, ?, ?);
+            `;
+
+            try {
+                // 이메일 전송 정보를 DB에 저장
+                const date = new Date().toISOString().slice(0, 19).replace('T', ' '); // 현재 시간 포맷
+                const status = true; // 전송 성공 시 true
+                for (const email of emailList) {
+                    await connection.query(query, [event_id, email, date, status]);
+                }
+
+                // 성공 메시지 반환
+                res.status(200).json({
+                    message: '이메일이 성공적으로 전송되었습니다.',
+                    info: info
+                });
+            } catch (dbError) {
+                console.error('이메일 전송 결과 저장 실패:', dbError);
+                res.status(500).json({ message: '이메일 전송 결과 저장에 실패했습니다.' });
+            }
         });
 
     } catch (error) {
@@ -299,6 +319,29 @@ router.post('/sendemail/:event_id', async (req, res) => {
         res.status(500).json({ message: '서버 내부 오류' });
     }
 });
+
+// 전체 전송 결과 불러오기
+router.get('/send/result', (req, res) => {
+    // 이메일 전송 결과를 필요한 형식으로 반환
+    connection.query(
+        'SELECT * FROM Send',
+        (err, result) => {
+            if (err) {
+                console.error('결과 조회 중 오류:', err);
+                return res.status(500).json({ message: '서버 내부 오류' });
+            }
+
+            // 데이터 반환
+            res.status(200).json({
+                message: '결과 조회 성공',
+                data: result
+            });
+        }
+    );
+});
+
+
+
 
 
 module.exports = router;

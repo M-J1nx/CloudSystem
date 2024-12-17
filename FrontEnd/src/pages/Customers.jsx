@@ -121,6 +121,27 @@ const Customers = () => {
         </Box>
       </Box>
 
+      <Box className={styles.addAddress}>
+        <Box className={styles.addArea}>
+          <input
+            className={styles.textInput}
+            type="text"
+          />
+        </Box>
+        <Box>
+          <input
+            className={styles.textInput}
+            type="text"
+          />
+        </Box>
+        <Box>
+          <input
+            className={styles.textInput}
+            type="text"
+          />
+        </Box>
+      </Box>
+
       <Box className={styles.mailCatalog}>
         <Box className={styles.row}>
           <Box className={styles.cellCheckbox}>
