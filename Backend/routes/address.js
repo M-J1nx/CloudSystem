@@ -306,7 +306,19 @@ router.post('/sendemail/:event_id', async (req, res) => {
                 // 성공 메시지 반환
                 res.status(200).json({
                     message: '이메일이 성공적으로 전송되었습니다.',
-                    info: info
+                    info: {
+                        accepted: info.accepted,
+                        rejected: info.rejected,
+                        envelopeTime: info.envelopeTime,
+                        messageTime: info.messageTime,
+                        messageSize: info.messageSize,
+                        response: info.response,
+                        envelope: {
+                            from: info.envelope.from,
+                            to: info.envelope.to
+                        },
+                        messageId: info.messageId
+                    }
                 });
             } catch (dbError) {
                 console.error('이메일 전송 결과 저장 실패:', dbError);
