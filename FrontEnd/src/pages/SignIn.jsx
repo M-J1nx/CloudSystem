@@ -1,15 +1,51 @@
-import { useCallback } from "react";
+import { useCallback, useState } from "react";
 import { Typography, Box } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import styles from "./SignIn.module.css";
 
 const SignIn = () => {
   const navigate = useNavigate();
+  const [formData, setFormData] = useState({
+    id: "",
+    password: "",
+  });
+  const [error, setError] = useState("");
 
-  // Create Account 버튼 클릭 핸들러
-  const onCreateAccountClick = useCallback(() => {
-    navigate("/dashboard"); // Main 페이지로 이동
-  }, [navigate]);
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prevState => ({
+      ...prevState,
+      [name]: value
+    }));
+  };
+
+  const handleSignIn = async (e) => {
+    e.preventDefault();
+    setError("");
+
+    try {
+      // GET 요청에서 body를 보낼 수 없으므로 쿼리 파라미터로 전송
+      const response = await fetch(`http://localhost:3000/account/login?id=${formData.id}&password=${formData.password}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        // 로그인 성공
+        navigate("/dashboard");
+      } else {
+        // 로그인 실패
+        setError(data.message || "로그인에 실패했습니다.");
+      }
+    } catch (error) {
+      setError("서버 연결에 실패했습니다.");
+      console.error("Login error:", error);
+    }
+  };
 
   const onLinkContainerClick = useCallback(() => {
     navigate("/create-account");
@@ -36,16 +72,19 @@ const SignIn = () => {
       <Box className={styles.margin1}>
         <Box className={styles.container1}>
           <Box className={styles.backgroundborder}>
-            <Box className={styles.form}>
-              {/* Email Input */}
+            <form className={styles.form} onSubmit={handleSignIn}>
+              {/* ID Input (이전 Email 대신) */}
               <Box className={styles.container2}>
                 <Box className={styles.label}>
-                  <Box className={styles.email}>Email</Box>
+                  <Box className={styles.email}>ID</Box>
                 </Box>
                 <Box className={styles.input}>
                   <input
-                    className={styles.textInput} // 추가된 클래스
-                    type="email"
+                    className={styles.textInput}
+                    type="text"
+                    name="id"
+                    value={formData.id}
+                    onChange={handleInputChange}
                   />
                 </Box>
               </Box>
@@ -56,19 +95,28 @@ const SignIn = () => {
                 </Box>
                 <Box className={styles.input}>
                   <input
-                    className={styles.textInput} // 추가된 클래스
+                    className={styles.textInput}
                     type="password"
+                    name="password"
+                    value={formData.password}
+                    onChange={handleInputChange}
                   />
                 </Box>
               </Box>
+              {/* Error Message */}
+              {error && (
+                <Box sx={{ color: 'red', textAlign: 'center', mb: 2 }}>
+                  {error}
+                </Box>
+              )}
               {/* Sign In Button */}
-              <Box 
+              <button 
+                type="submit"
                 className={styles.button}
-                onClick={onCreateAccountClick} // 클릭 이벤트 핸들러 추가
               >
                 <Box className={styles.signIn1}>Sign in</Box>
-              </Box>
-            </Box>
+              </button>
+            </form>
           </Box>
           {/* Create Account Link */}
           <Box className={styles.container8}>
