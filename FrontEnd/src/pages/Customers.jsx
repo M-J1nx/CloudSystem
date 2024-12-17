@@ -9,9 +9,9 @@ import axios from "axios";
 const Customers = () => {
   const navigate = useNavigate();
 
-  const [customers, setCustomers] = useState([]); // 고객 데이터 상태 변수
-  const [loading, setLoading] = useState(true); // 로딩 상태 변수
-  const [error, setError] = useState(null); // 에러 상태 변수
+  const [customers, setCustomers] = useState([]); 
+  const [loading, setLoading] = useState(true); 
+  const [error, setError] = useState(null); 
 
   const onSidenavItemContainerClick = useCallback(() => {
     navigate("/dashboard");
@@ -35,11 +35,11 @@ const Customers = () => {
       try {
         // 서버에서 고객 데이터 가져오기
         const response = await axios.get("http://localhost:3000/address");
-        setCustomers(response.data.data); // 고객 데이터를 상태에 저장
+        setCustomers(response.data.data);
       } catch (err) {
-        setError("고객 데이터를 가져오는 데 실패했습니다."); // 에러 처리
+        setError("고객 데이터를 가져오는 데 실패했습니다."); 
       } finally {
-        setLoading(false); // 로딩 종료
+        setLoading(false); 
       }
     };
 
@@ -163,11 +163,11 @@ const Customers = () => {
             </Box>
           </Box>
         </Box>
-        {customers.map((customer, index) => ( // 수정된 부분: 'customers' 상태 사용
+        {customers.map((customer, index) => ( 
           <CustomerRow
             key={index}
-            email={customer.ADDRESS_EMAIL} // 수정된 부분: customer email 데이터 바인딩
-            name={customer.ADDRESS_NAME} // 수정된 부분: customer name 데이터 바인딩
+            email={customer.ADDRESS_EMAIL} 
+            name={customer.ADDRESS_NAME} 
             position={customer.ADDRESS_POSITION}
           />
         ))}

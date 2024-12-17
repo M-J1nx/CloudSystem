@@ -8,8 +8,7 @@ const Template = ({ className = "", heading, heading1, templateName }) => {
   const navigate = useNavigate();
 
   const handleEditClick = () => {
-    // 템플릿 수정 페이지로 이동
-    navigate(`/templates/${heading}/edit`);  // 템플릿 이름을 URL에 전달
+    navigate(`/templates/${heading}/edit`); 
   };
 
   return (

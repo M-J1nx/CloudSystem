@@ -125,7 +125,6 @@ router.get('/:event_id', (req, res) => {
 
 // 전체 주소록 조회
 router.get('/', (req, res) => {
-    // 전체 주소록 조회 쿼리
     connection.query(
         'SELECT * FROM Address', // 이벤트와 관계 없이 모든 주소록 조회
         (err, addresses) => {

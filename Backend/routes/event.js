@@ -4,7 +4,7 @@ const connection = require('../db');
 
 // 이벤트 목록 조회 (user_id로 필터링)
 router.get('/', (req, res) => {
-    const { user_id } = req.query;  // URL 쿼리에서 user_id 가져오기
+    const { user_id } = req.query; 
 
     let query = 'SELECT * FROM Event';
     let params = [];

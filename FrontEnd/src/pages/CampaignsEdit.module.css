@@ -333,20 +333,20 @@
 }
 .buttonContainer {
   display: flex;
-  gap: 16px;  /* 버튼 사이 간격 */
-  justify-content: flex-end;  /* 오른쪽 정렬 */
-  margin-top: 20px;  /* 위 여백 */
+  gap: 16px;  
+  justify-content: flex-end;  
+  margin-top: 20px;  
 }
 
 .actionButton {
   padding: 8px 24px;
-  background-color: #007bff;  /* 또는 원하는 색상 */
+  background-color: #007bff;  
   border-radius: 4px;
   cursor: pointer;
 }
 
 .actionButton:hover {
-  background-color: #0056b3;  /* 호버 효과 */
+  background-color: #0056b3;  
 }
 
 .button{

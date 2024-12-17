@@ -1,5 +1,5 @@
 import { Box, Typography, Button } from "@mui/material";
-import { useNavigate, useParams } from "react-router-dom";  // useParams 추가
+import { useNavigate, useParams } from "react-router-dom"; 
 import SidenavItem from "../components/SidenavItem";
 import styles from "./TemplateEdit.module.css";
 import axios from "axios";
@@ -7,16 +7,16 @@ import { useState, useEffect } from "react";
 
 const TemplateEdit = () => {
   const navigate = useNavigate();
-  const { templateName } = useParams();  // URL에서 템플릿 이름을 가져오기
+  const { templateName } = useParams();  
 
   const [template, setTemplate] = useState({
     templateName: "",
     mailTitle: "",
     mailContent: "",
     mailImage: "",
-  }); // 템플릿 정보 상태 초기화
-  const [loading, setLoading] = useState(false); // 로딩 상태
-  const [error, setError] = useState(""); // 오류 메시지 상태
+  }); 
+  const [loading, setLoading] = useState(false); 
+  const [error, setError] = useState(""); 
 
   // 템플릿 데이터를 불러오는 함수
   useEffect(() => {
@@ -24,7 +24,7 @@ const TemplateEdit = () => {
       try {
         setLoading(true);
         const response = await axios.get(`http://localhost:3000/template/${templateName}`);
-        setTemplate(response.data);  // 템플릿 상태에 데이터 설정
+        setTemplate(response.data); 
         setLoading(false);
       } catch (err) {
         setLoading(false);
@@ -33,7 +33,7 @@ const TemplateEdit = () => {
     };
 
     fetchTemplateData();
-  }, []);  // templateName이 변경될 때마다 실행되도록 설정
+  }, []); 
 
   // 템플릿 수정 함수
   const handleSave = async () => {
@@ -49,8 +49,8 @@ const TemplateEdit = () => {
         mailImage: template.mailImage,
       });
       setLoading(false);
-      alert(response.data.message);  // 템플릿 수정 성공 알림
-      navigate("/templates");  // 템플릿 목록 페이지로 이동
+      alert(response.data.message); 
+      navigate("/templates");  
     } catch (err) {
       setLoading(false);
       setError("템플릿 수정 중 오류가 발생했습니다.");
@@ -61,16 +61,16 @@ const TemplateEdit = () => {
   const handleInputChange = (field) => (event) => {
     setTemplate((prevTemplate) => ({
       ...prevTemplate,
-      [field]: event.target.value,  // 해당 필드만 업데이트
+      [field]: event.target.value,  
     }));
   };
 
   if (loading) {
-    return <div>Loading...</div>;  // 로딩 중에는 'Loading...' 표시
+    return <div>Loading...</div>;  
   }
 
   if (error) {
-    return <div>{error}</div>;  // 오류 발생 시 오류 메시지 표시
+    return <div>{error}</div>; 
   }
 
   return (
@@ -118,15 +118,15 @@ const TemplateEdit = () => {
           <input
             className={styles.textInput}
             type="text"
-            value={template.templateName || ""}  // 템플릿 제목 표시
-            onChange={handleInputChange('templateName')}  // 템플릿 제목 수정
+            value={template.templateName || ""}  
+            onChange={handleInputChange('templateName')}  
           />
         </Box>
         <Box className={styles.fieldContent1}>
           <textarea
             className={styles.textInput}
-            value={template.mailContent || ""}  // 이메일 내용 표시
-            onChange={handleInputChange('mailContent')}  // 이메일 내용 수정
+            value={template.mailContent || ""}  
+            onChange={handleInputChange('mailContent')}
             rows={100}
           />
           <Box className={styles.pictureWrapper}>
@@ -138,7 +138,7 @@ const TemplateEdit = () => {
         <Button
           variant="contained"
           className={styles.saveButton}
-          onClick={handleSave}  // 템플릿 수정 함수 호출
+          onClick={handleSave} 
           sx={{
             backgroundColor: "transparent",
             color: "white",

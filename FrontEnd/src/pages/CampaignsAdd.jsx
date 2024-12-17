@@ -22,7 +22,6 @@ const CampaignsAdd = () => {
 
   const handleSubmit = async () => {
     try {
-      // localStorage에서 로그인한 사용자 정보 가져오기
       const userStr = localStorage.getItem('user');
       if (!userStr) {
         navigate('/sign-in');

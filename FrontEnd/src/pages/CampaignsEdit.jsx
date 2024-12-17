@@ -105,7 +105,7 @@ const CampaignsEdit = () => {
           mailTitle: eventData.EVENT_NAME,
           mailContent: eventData.email_body,
           reserveTime: null,
-          user_id: user.user_id, // 로그인한 사용자의 ID를 로컬 스토리지에서 가져옴
+          user_id: user.user_id,  
           gmailPassword: gmailPassword
         }),
       });
@@ -215,7 +215,7 @@ const CampaignsEdit = () => {
           />
         </Box>
         <Box className={styles.rowParent}>
-          {/* 통계 테이블은 그대로 유지 */}
+          {}
         </Box>
       </Box>
       <Box className={styles.buttonContainer}>

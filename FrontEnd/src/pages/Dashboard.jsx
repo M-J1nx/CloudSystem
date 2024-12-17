@@ -40,15 +40,15 @@ const Dashboard = () => {
   const [templates, setTemplates] = useState([]);
   const fetchTemplates = async () => {
     try {
-      const response = await axios.get("http://localhost:3000/template/list/result");  // API 엔드포인트 수정
-      setTemplates(response.data);  // 템플릿 데이터를 상태로 저장
+      const response = await axios.get("http://localhost:3000/template/list/result");  
+      setTemplates(response.data);  
     } catch (error) {
       console.error("Failed to fetch templates:", error);
     }
   };
 
   useEffect(() => {
-    fetchTemplates();  // 컴포넌트가 마운트되면 템플릿 데이터를 불러옴
+    fetchTemplates();  
   }, []);
 
   return (
@@ -66,9 +66,9 @@ const Dashboard = () => {
       <Box className={styles.templateParent}>
         {templates.map((template) => (
           <Template
-            key={template.id}  // 템플릿 고유의 id를 key로 사용
-            heading={template.templateName}  // API에서 가져온 템플릿 이름
-            heading1={template.mailContent}  // API에서 가져온 메일 내용
+            key={template.id}  
+            heading={template.templateName}  
+            heading1={template.mailContent}  
           />
         ))}
       </Box>

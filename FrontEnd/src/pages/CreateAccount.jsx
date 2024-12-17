@@ -37,10 +37,8 @@ const CreateAccount = () => {
       const data = await response.json();
 
       if (response.ok) {
-        // 회원가입 성공
         navigate("/main");
       } else {
-        // 회원가입 실패
         setError(data.message || "회원가입에 실패했습니다.");
       }
     } catch (error) {

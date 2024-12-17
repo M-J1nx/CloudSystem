@@ -74,7 +74,6 @@ router.put('/:templateName/edit', (req, res) => {
     const { templateName } = req.params; // 기존 템플릿 이름 (URL에서 추출)
     const { mailContent, mailImage } = req.body; // 새로 받은 데이터
 
-    // Step 1: template_name으로 template_id 조회
     const findIdQuery = 'SELECT template_id FROM Template WHERE template_name = ?';
     connection.query(findIdQuery, [templateName], (err, results) => {
         if (err) {
@@ -90,7 +89,6 @@ router.put('/:templateName/edit', (req, res) => {
         const templateId = results[0].template_id; // 기존 템플릿 ID
         console.log("Found templateId:", templateId);
 
-        // Step 2: template_id로 템플릿 내용 업데이트
         const updateQuery = `
             UPDATE Template 
             SET template_name = ?, mail_content = ?, mail_image = ?
@@ -140,7 +138,7 @@ router.post('/image', upload.single('image'), (req, res) => {
         return res.status(400).json({ message: 'ID와 이미지를 제공해주세요.' });
     }
 
-    const imageUrl = `http://localhost:3000/uploads/${req.file.filename}`;  // 저장된 이미지 URL (서버 URL + 경로)
+    const imageUrl = `http://localhost:3000/uploads/${req.file.filename}`; 
 
     const query = 'UPDATE Template SET mail_image = ? WHERE template_id = ?';
     connection.query(query, [imageUrl, id], (err) => {

@@ -10,10 +10,10 @@ import { useState, useEffect } from "react";
 const TemplateAdd = () => {
   const navigate = useNavigate();  
 
-  const [templateName, setTemplateName] = useState("");  // 템플릿 이름 상태
+  const [templateName, setTemplateName] = useState("");  
   const [mailContent, setMailContent] = useState("");
-  const [loading, setLoading] = useState(false);  // 로딩 상태
-  const [error, setError] = useState("");  // 오류 메시지 상태
+  const [loading, setLoading] = useState(false);  
+  const [error, setError] = useState("");  
 
   const handleInputChange = (setter) => (event) => {
     setter(event.target.value);
@@ -28,15 +28,15 @@ const TemplateAdd = () => {
     try {
       setLoading(true);
       const response = await axios.post("http://localhost:3000/template", {
-        templateName,  // 템플릿 이름
-        mailContent,  // 이메일 내용
+        templateName, 
+        mailContent,  
       });
       setLoading(false);
-      alert(response.data.message);  // 템플릿 생성 성공 알림
-      navigate("/templates"); // 템플릿 목록 페이지로 이동
+      alert(response.data.message); 
+      navigate("/templates"); 
     } catch (error) {
       setLoading(false);
-      setError("템플릿 생성 중 오류가 발생했습니다.");  // 오류 처리
+      setError("템플릿 생성 중 오류가 발생했습니다.");  
     }
   };
 
@@ -121,7 +121,7 @@ const TemplateAdd = () => {
       <Button
         variant="contained"
         className={styles.saveButton}
-        onClick={createTemplate}  // createTemplate 함수 호출
+        onClick={createTemplate}  
         sx={{
           backgroundColor: "transparent",
           color: "white",
