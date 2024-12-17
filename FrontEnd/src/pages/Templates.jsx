@@ -46,7 +46,7 @@ const Templates = () => {
   }, [navigate]);
 
   const onButtonContainerClick = useCallback(() => {
-    navigate("/template-edit");
+    navigate("/template-add");
   }, [navigate]);
 
   return (

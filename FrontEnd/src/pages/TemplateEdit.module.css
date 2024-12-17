@@ -292,3 +292,15 @@
   color: var(--dark-gray-dark-gray-2);
   font-family: var(--font-pretendard);
 }
+/* textarea에 같은 클래스가 적용되도록 추가 */
+textarea {
+  width: 100%;
+  position: relative;
+  background-color: var(--appuseplunkcom-white);
+  height: 1200px;
+  overflow-y: auto;
+  text-align: left;
+  font-size: var(--wwwuseplunkcom-inter-regular-size);
+  color: var(--dark-gray-dark-gray-2);
+  font-family: var(--font-pretendard);
+}
