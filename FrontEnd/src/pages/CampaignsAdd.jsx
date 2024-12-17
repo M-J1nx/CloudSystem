@@ -1,11 +1,57 @@
+import { useState } from "react";
 import { Box, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import SidenavItem from "../components/SidenavItem";
-import Badge from "../components/Badge";
 import styles from "./CampaignsAdd.module.css";
 
-const CampaignsEdit = () => {
+const CampaignsAdd = () => {
   const navigate = useNavigate();
+  const [formData, setFormData] = useState({
+    EVENT_NAME: "",
+    email_body: ""
+  });
+  const [error, setError] = useState("");
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+
+  const handleSubmit = async () => {
+    try {
+      // localStorage에서 로그인한 사용자 정보 가져오기
+      const userStr = localStorage.getItem('user');
+      if (!userStr) {
+        navigate('/sign-in');
+        return;
+      }
+
+      const user = JSON.parse(userStr);
+
+      const response = await fetch('http://localhost:3000/event', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          user_id: user.user_id,
+          event_name: formData.EVENT_NAME
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error('이벤트 생성 실패');
+      }
+
+      navigate('/campaigns');
+    } catch (err) {
+      setError("이벤트 생성에 실패했습니다.");
+      console.error("Event creation error:", err);
+    }
+  };
 
   return (
     <Box className={styles.campaignsEdit}>
@@ -58,8 +104,13 @@ const CampaignsEdit = () => {
           fontWeight: "700",
         }}
       >
-        Add Campaigns
+        Add Campaign
       </Typography>
+      {error && (
+        <Box sx={{ color: 'red', textAlign: 'center', mb: 2 }}>
+          {error}
+        </Box>
+      )}
       <Box className={styles.subjectParent}>
         <Box className={styles.subject}>Subject</Box>
         <Box className={styles.emailBody}>Email Body</Box>
@@ -67,27 +118,37 @@ const CampaignsEdit = () => {
           <input
             className={styles.textInput}
             type="text"
+            name="EVENT_NAME"
+            value={formData.EVENT_NAME}
+            onChange={handleInputChange}
+            placeholder="Enter event name"
           />
         </Box>
         <Box className={styles.fieldContent1}>
           <input
             className={styles.textInput}
             type="text"
+            name="email_body"
+            value={formData.email_body}
+            onChange={handleInputChange}
+            placeholder="Enter email body"
           />
         </Box>
       </Box>
-      <Box className={styles.depth5Frame1}>
-        <Box className={styles.depth6Frame0} onClick={() => navigate("/campaigns")}>
-          <Box className={styles.save}>Send</Box>
+      <Box sx={{ display: 'flex', gap: 2, justifyContent: 'flex-end', mt: 2 }}>
+        <Box className={styles.depth5Frame1}>
+          <Box className={styles.depth6Frame0} onClick={handleSubmit}>
+            <Box className={styles.save}>Send</Box>
+          </Box>
         </Box>
-      </Box>
-      <Box className={styles.depth5Frame2}>
-        <Box className={styles.depth6Frame0} onClick={() => navigate("/campaigns")}>
-          <Box className={styles.save}>Cancel</Box>
+        <Box className={styles.depth5Frame2}>
+          <Box className={styles.depth6Frame0} onClick={() => navigate("/campaigns")}>
+            <Box className={styles.save}>Cancel</Box>
+          </Box>
         </Box>
       </Box>
     </Box>
   );
 };
 
-export default CampaignsEdit;
+export default CampaignsAdd;
